@@ -1,0 +1,40 @@
+{
+  "name": "문어  mannyang",
+  "intro": "바이브코딩을 활용한 사이트 포트폴리오\n직접 만든 사이트와 의뢰받아 제작한 사이트를 모아두었습니다.",
+  "original": [
+    {
+      "name": "아이프리 코디네이트 옷장",
+      "desc": "보유한 아이프리버스 코디를 정리하는 페이지입니다.",
+      "url": "https://mannnyang00.github.io/coordinate/"
+    },
+    {
+      "name": "준비중",
+      "desc": "Preparing...",
+      "url": ""
+    }
+  ],
+  "commission": [
+    {
+      "name": "준비중",
+      "desc": "Preparing...",
+      "url": ""
+    }
+  ],
+  "contact": [
+    {
+      "label": "Email",
+      "value": "mannnyang00@gmail.com",
+      "url": ""
+    },
+    {
+      "label": "X",
+      "value": "@mannnyang00",
+      "url": "https://x.com/mannnyang00?s=11&tIc60F8xM9uWmEdTW0r159w"
+    },
+    {
+      "label": "크레페",
+      "value": "만냥 (@mannnyang00)",
+      "url": ""
+    }
+  ]
+}

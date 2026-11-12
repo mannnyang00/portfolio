@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=Nunito:wght@600;800;900&display=swap">
+<style>
+  /* Layout: one soft centered column; home = name, intro, two pill doors, contact card. List = numbered rounded rows. */
+  :root {
+    --bg: #fff3f7;
+    --surface: #ffffff;
+    --pink: #f6b3c8;
+    --pink-soft: #fde1ea;
+    --pink-deep: #e07a9c;
+    --ink: #5b3b48;
+    --muted: #a07d8b;
+    --line: #f6d4e0;
+    --display: "Nunito", "Jua", "Apple SD Gothic Neo", sans-serif;
+    --body: "Nunito", "Gowun Dodum", "Apple SD Gothic Neo", sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(60% 40% at 15% 0%, var(--pink-soft), transparent 70%), radial-gradient(50% 35% at 100% 100%, var(--pink-soft), transparent 70%); }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  .wrap { max-width: 680px; margin: 0 auto; padding-block: 84px 96px; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+
+  /* Home */
+  .hero { text-align: center; }
+  .petal { display: inline-flex; gap: 6px; margin-bottom: 18px; }
+  .petal i { width: 10px; height: 10px; border-radius: 50% 0 50% 50%; background: var(--pink); transform: rotate(-45deg); }
+  .petal i:nth-child(2) { background: var(--pink-deep); }
+  h1 { margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(46px, 11vw, 88px); line-height: 1.02; letter-spacing: -.01em; color: var(--pink-deep); text-wrap: balance; }
+  .suffix { display: block; margin-top: 8px; font-family: "Jua", var(--display); font-weight: 400; font-size: clamp(22px, 4.4vw, 30px); color: var(--ink); }
+  .intro { margin: 16px auto 0; max-width: 30em; font-size: 15px; color: var(--muted); white-space: pre-line; }
+
+  .doors { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 52px; }
+  .door { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 26px 16px 22px; background: var(--surface); border: 2px solid var(--line); border-radius: 28px; text-decoration: none; transition: transform .18s, border-color .18s, background .18s; }
+  .door:hover { transform: translateY(-3px); border-color: var(--pink); background: #fffafc; }
+  .door .ko { font-family: "Jua", var(--display); font-size: 26px; color: var(--ink); }
+  .door .en { font-family: var(--display); font-weight: 800; font-size: 14px; color: var(--pink-deep); }
+  .door .count { margin-top: 10px; font-family: var(--display); font-weight: 800; font-size: 12px; color: var(--muted); background: var(--pink-soft); border-radius: 999px; padding: 2px 10px; font-variant-numeric: tabular-nums; }
+
+  .contact { margin-top: 44px; padding: 24px; background: var(--surface); border: 2px solid var(--line); border-radius: 24px; text-align: center; }
+  .contact h2 { margin: 0 0 14px; font-family: var(--display); font-weight: 900; font-size: 18px; color: var(--pink-deep); }
+  .contact dl { margin: 0; display: flex; flex-direction: column; align-items: center; }
+  .contact dt { font-family: var(--display); font-weight: 800; font-size: 13px; color: var(--muted); }
+  .contact dd { margin: 0 0 12px; max-width: 100%; overflow-wrap: anywhere; }
+  .contact dd:last-child { margin-bottom: 0; }
+  .contact dd a { text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+  /* List */
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 2px solid var(--line); border-radius: 999px; font-family: var(--display); font-weight: 800; font-size: 14px; text-decoration: none; }
+  .pill:hover { border-color: var(--pink); }
+  .home { position: fixed; z-index: 5; top: calc(16px + env(safe-area-inset-top, 0px)); left: max(16px, env(safe-area-inset-left, 0px)); }
+  .list-head { text-align: center; margin-top: 12px; }
+  .list-head h1 { font-family: "Jua", var(--display); font-weight: 400; font-size: clamp(38px, 8vw, 56px); color: var(--ink); }
+  .list-head p { margin: 4px 0 0; font-family: var(--display); font-weight: 800; color: var(--pink-deep); }
+  .rows { list-style: none; margin: 40px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .row { display: grid; grid-template-columns: 52px 1fr 20px; gap: 16px; align-items: center; padding: 16px 20px 16px 16px; background: var(--surface); border: 2px solid var(--line); border-radius: 22px; text-decoration: none; transition: transform .18s, border-color .18s; }
+  .row:hover { transform: translateY(-2px); border-color: var(--pink); }
+  .num { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--pink-soft); font-family: var(--display); font-weight: 900; font-size: 17px; color: var(--pink-deep); font-variant-numeric: tabular-nums; }
+  .row .text { min-width: 0; }
+  .row .name { display: block; font-family: "Jua", var(--display); font-size: 20px; line-height: 1.35; }
+  .row .desc { display: block; margin-top: 2px; font-size: 13.5px; color: var(--muted); }
+  .row .arrow { color: var(--pink); font-weight: 900; }
+  .empty { text-align: center; margin-top: 40px; color: var(--muted); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+
+  /* Admin */
+  .admin-btn { position: fixed; z-index: 6; top: calc(16px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
+  .admin-btn.on { background: var(--pink-deep); border-color: var(--pink-deep); color: #fff; }
+  .panel { position: fixed; z-index: 20; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--surface); border-left: 2px solid var(--line); box-shadow: -12px 0 40px rgba(224, 122, 156, .18); display: flex; flex-direction: column; }
+  .panel-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: calc(16px + env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 14px 20px; border-bottom: 2px solid var(--line); }
+  .panel-top h2 { margin: 0; font-family: "Jua", var(--display); font-weight: 400; font-size: 22px; }
+  .panel-body { flex: 1; overflow-y: auto; padding: 18px max(20px, env(safe-area-inset-right, 0px)) 24px 20px; display: flex; flex-direction: column; gap: 22px; }
+  .panel-foot { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 14px max(20px, env(safe-area-inset-right, 0px)) calc(14px + env(safe-area-inset-bottom, 0px)) 20px; border-top: 2px solid var(--line); }
+  .grp { display: flex; flex-direction: column; gap: 10px; }
+  .grp h3 { margin: 0; font-family: var(--display); font-weight: 900; font-size: 15px; color: var(--pink-deep); }
+  .grp h3 small { margin-left: 6px; font-weight: 600; color: var(--muted); }
+  .f { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--muted); min-width: 0; }
+  .f input, .f textarea { font: inherit; font-size: 14px; color: var(--ink); background: var(--bg); border: 2px solid var(--line); border-radius: 12px; padding: 7px 11px; width: 100%; }
+  .f textarea { resize: vertical; min-height: 56px; }
+  .item { display: flex; flex-direction: column; gap: 6px; padding: 12px; border: 2px dashed var(--line); border-radius: 16px; }
+  .item-top { display: flex; justify-content: space-between; align-items: center; }
+  .item-top b { font-family: var(--display); font-weight: 900; color: var(--pink-deep); font-variant-numeric: tabular-nums; }
+  .tools { display: flex; gap: 4px; }
+  .tools button { width: 30px; height: 28px; border: 2px solid var(--line); background: var(--surface); border-radius: 10px; font-size: 13px; }
+  .tools button:hover:not(:disabled) { border-color: var(--pink); }
+  .tools button:disabled { opacity: .35; cursor: default; }
+  .add { align-self: flex-start; border: 2px dashed var(--pink); background: transparent; border-radius: 999px; padding: 5px 14px; font-family: var(--display); font-weight: 800; font-size: 13px; color: var(--pink-deep); }
+  .btn { border: 2px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 16px; font-family: var(--display); font-weight: 800; font-size: 14px; }
+  .btn:hover { border-color: var(--pink); }
+  .btn.main { background: var(--pink-deep); border-color: var(--pink-deep); color: #fff; }
+  .btn.main:hover { filter: brightness(1.05); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .msg { width: 100%; margin: 0; font-size: 13px; color: var(--muted); min-height: 1.3em; }
+  .msg.err { color: #c2410c; }
+  .json { margin: 0; max-height: 180px; overflow: auto; background: var(--bg); border: 2px solid var(--line); border-radius: 12px; padding: 10px; font: 12px/1.5 ui-monospace, Menlo, monospace; white-space: pre; }
+  .veil { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(91, 59, 72, .28); }
+  .keybox { width: min(340px, 100%); display: flex; flex-direction: column; gap: 12px; padding: 24px; background: var(--surface); border: 2px solid var(--line); border-radius: 24px; box-shadow: 0 20px 50px rgba(224, 122, 156, .25); }
+  .keybox h2 { margin: 0; font-family: "Jua", var(--display); font-weight: 400; font-size: 22px; }
+  .keybtns { display: flex; gap: 8px; }
+  .hint { margin: 0; font-size: 12.5px; color: var(--muted); }
+
+  @media (max-width: 520px) {
+    .wrap { padding-block: 72px 72px; }
+    .doors { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 44px 1fr 16px; gap: 12px; }
+    .num { width: 44px; height: 44px; font-size: 15px; }
+    .panel { border-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<div id="admin-root"></div>
+
+<script type="module">
+import { FIREBASE_CONFIG, ADMIN_EMAIL } from "./firebase-config.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const SECTIONS = { original: { ko: "개인작", en: "Original Work" }, commission: { ko: "커미션", en: "Commission Work" } };
+const FIELDS = {
+  original: [["name", "사이트 이름"], ["desc", "설명"], ["url", "주소 (https://…)"]],
+  commission: [["name", "사이트 이름"], ["desc", "설명"], ["url", "주소 (https://…)"]],
+  contact: [["label", "수단 (예: Email)"], ["value", "표시할 내용"], ["url", "링크 (선택)"]]
+};
+const app = document.getElementById("app");
+const adminRoot = document.getElementById("admin-root");
+let data = null, draft = null, panelOpen = false, saving = false, askKey = false, keyErr = "", isAdmin = false;
+let db = null, auth = null, siteDoc = null;
+const ready = FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey && !String(FIREBASE_CONFIG.apiKey).startsWith("여기에");
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pad = n => String(n).padStart(2, "0");
+const safeUrl = u => /^(https?:|mailto:|tel:)/i.test(String(u || "").trim()) ? String(u).trim() : "";
+const clone = o => JSON.parse(JSON.stringify(o));
+const normalize = d => ({ name: d.name || "", intro: d.intro || "", original: d.original || [], commission: d.commission || [], contact: d.contact || [] });
+const cur = () => draft || data;
+
+function home(d) {
+  document.title = "포트폴리오";
+  const doors = Object.entries(SECTIONS).map(([k, s]) => `
+    <a class="door" href="#${k}"><span class="ko">${s.ko}</span><span class="en">${s.en}</span><span class="count">${pad((d[k] || []).length)}</span></a>`).join("");
+  const contacts = (d.contact || []).filter(c => c.label || c.value).map(c => {
+    const u = safeUrl(c.url);
+    return `<dt>${esc(c.label)}</dt><dd>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(c.value)}</a>` : esc(c.value)}</dd>`;
+  }).join("");
+  app.innerHTML = `
+    <section class="hero">
+      <div class="petal" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h1>${esc(d.name || "ME W")}<span class="suffix">의 포트폴리오</span></h1>
+      ${d.intro ? `<p class="intro">${esc(d.intro)}</p>` : ""}
+    </section>
+    <nav class="doors">${doors}</nav>
+    ${contacts ? `<section class="contact"><h2>Contact</h2><dl>${contacts}</dl></section>` : ""}`;
+}
+
+function list(d, k) {
+  const s = SECTIONS[k], items = d[k] || [];
+  document.title = `${s.ko} · 포트폴리오`;
+  const rows = items.map((it, i) => {
+    const u = safeUrl(it.url);
+    return `<li><a class="row" ${u ? `href="${esc(u)}" target="_blank" rel="noopener"` : ""}>
+      <span class="num">${pad(i + 1)}</span>
+      <span class="text"><span class="name">${esc(it.name)}</span>${it.desc ? `<span class="desc">${esc(it.desc)}</span>` : ""}</span>
+      <span class="arrow" aria-hidden="true">→</span></a></li>`;
+  }).join("");
+  app.innerHTML = `
+    <a class="pill home" href="#">← Home</a>
+    <header class="list-head"><h1>${s.ko}</h1><p>${s.en}</p></header>
+    ${items.length ? `<ol class="rows">${rows}</ol>` : `<p class="empty">아직 등록된 작업물이 없어요.</p>`}`;
+}
+
+function render() {
+  if (!cur()) return;
+  const k = location.hash.slice(1);
+  SECTIONS[k] ? list(cur(), k) : home(cur());
+}
+
+/* ---------- 관리자 ---------- */
+function renderAdmin() {
+  let html = `<button class="pill admin-btn ${panelOpen ? "on" : ""}" type="button" id="admin-toggle">${panelOpen ? "편집 닫기" : "관리자"}</button>`;
+  if (askKey) {
+    html += `
+      <div class="veil">
+        <form class="keybox" id="key-form" autocomplete="off">
+          <h2>관리자 확인</h2>
+          <label class="f" for="admin-key">관리자 키<input id="admin-key" type="password" autocomplete="current-password"></label>
+          <p class="msg ${keyErr ? "err" : ""}" aria-live="polite">${esc(keyErr)}</p>
+          <div class="keybtns"><button class="btn main" type="submit">확인</button><button class="btn" type="button" id="key-cancel">취소</button></div>
+        </form>
+      </div>`;
+  }
+  if (panelOpen && draft) {
+    const groups = ["original", "commission", "contact"].map(k => {
+      const title = k === "contact" ? ["Contact", "연락 수단"] : [SECTIONS[k].ko, SECTIONS[k].en];
+      const items = draft[k].map((it, i) => `
+        <div class="item">
+          <div class="item-top"><b>${pad(i + 1)}</b><span class="tools">
+            <button type="button" data-k="${k}" data-i="${i}" data-a="up" aria-label="위로" ${i === 0 ? "disabled" : ""}>↑</button>
+            <button type="button" data-k="${k}" data-i="${i}" data-a="down" aria-label="아래로" ${i === draft[k].length - 1 ? "disabled" : ""}>↓</button>
+            <button type="button" data-k="${k}" data-i="${i}" data-a="del" aria-label="삭제">✕</button></span></div>
+          ${FIELDS[k].map(([f, lab]) => `<label class="f" for="e-${k}-${i}-${f}">${lab}<input id="e-${k}-${i}-${f}" data-k="${k}" data-i="${i}" data-f="${f}" value="${esc(it[f])}"></label>`).join("")}
+        </div>`).join("");
+      return `<div class="grp"><h3>${title[0]}<small>${title[1]}</small></h3>${items}
+        <button class="add" type="button" data-add="${k}">+ ${k === "contact" ? "연락처" : "사이트"} 추가</button></div>`;
+    }).join("");
+    html += `
+      <aside class="panel" aria-label="관리자 편집">
+        <div class="panel-top"><h2>사이트 편집</h2><button class="btn" type="button" id="lock">로그아웃</button></div>
+        <div class="panel-body">
+          <div class="grp"><h3>첫 화면</h3>
+            <label class="f" for="e-name">이름 (뒤에 "의 포트폴리오"가 붙어요)<input id="e-name" data-top="name" value="${esc(draft.name)}"></label>
+            <label class="f" for="e-intro">소개 문구<textarea id="e-intro" data-top="intro" rows="2">${esc(draft.intro)}</textarea></label>
+          </div>
+          ${groups}
+        </div>
+        <div class="panel-foot">
+          <button class="btn main" type="button" id="save" ${saving ? "disabled" : ""}>${saving ? "저장 중…" : "저장하기"}</button>
+          <button class="btn" type="button" id="discard">변경 취소</button>
+          <p class="msg" id="msg" aria-live="polite"></p>
+        </div>
+      </aside>`;
+  }
+  adminRoot.innerHTML = html;
+  if (askKey) { const k = document.getElementById("admin-key"); k && k.focus(); }
+}
+
+function setMsg(t, err) { const m = document.getElementById("msg"); if (m) { m.textContent = t; m.className = "msg" + (err ? " err" : ""); } }
+
+adminRoot.addEventListener("submit", async e => {
+  if (e.target.id !== "key-form") return;
+  e.preventDefault();
+  if (!ready) { keyErr = "Firebase 설정이 아직 없어요. firebase-config.js를 먼저 채워 주세요."; renderAdmin(); return; }
+  const v = document.getElementById("admin-key").value;
+  try {
+    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, v);
+    askKey = false; keyErr = ""; panelOpen = true; draft = clone(data);
+    renderAdmin(); render();
+  } catch (err) {
+    keyErr = err && err.code === "auth/too-many-requests" ? "시도가 너무 많아요. 잠시 뒤 다시 해 주세요." : "관리자 키가 맞지 않아요.";
+    renderAdmin();
+  }
+});
+
+adminRoot.addEventListener("input", e => {
+  const t = e.target; if (!draft) return;
+  if (t.dataset.top) draft[t.dataset.top] = t.value;
+  else if (t.dataset.k) draft[t.dataset.k][+t.dataset.i][t.dataset.f] = t.value;
+  else return;
+  render();
+});
+
+adminRoot.addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.id === "key-cancel") { askKey = false; keyErr = ""; renderAdmin(); return; }
+  if (b.id === "lock") {
+    panelOpen = false; draft = null;
+    try { await signOut(auth); } catch (err) {}
+    renderAdmin(); render(); return;
+  }
+  if (b.id === "admin-toggle") {
+    if (!isAdmin && !panelOpen) { askKey = true; keyErr = ""; renderAdmin(); return; }
+    panelOpen = !panelOpen;
+    if (panelOpen) draft = clone(data); else draft = null;
+    renderAdmin(); render(); return;
+  }
+  if (b.dataset.add) {
+    const k = b.dataset.add;
+    draft[k].push(Object.fromEntries(FIELDS[k].map(([f]) => [f, ""])));
+    renderAdmin(); render();
+    const last = adminRoot.querySelector(`[data-k="${k}"][data-i="${draft[k].length - 1}"][data-f]`); last && last.focus();
+    return;
+  }
+  if (b.dataset.a) {
+    const k = b.dataset.k, i = +b.dataset.i, arr = draft[k];
+    if (b.dataset.a === "del") arr.splice(i, 1);
+    if (b.dataset.a === "up") [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+    if (b.dataset.a === "down") [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
+    renderAdmin(); render(); return;
+  }
+  if (b.id === "discard") { draft = clone(data); renderAdmin(); render(); setMsg("저장된 내용으로 되돌렸어요."); return; }
+  if (b.id === "save") {
+    saving = true; renderAdmin();
+    try {
+      await setDoc(siteDoc, normalize(draft));
+      data = clone(draft); saving = false; renderAdmin();
+      setMsg("저장했어요. 사이트에 바로 반영됐어요.");
+    } catch (err) {
+      saving = false; renderAdmin();
+      setMsg(err && err.code === "permission-denied" ? "저장 권한이 없어요. 다시 로그인해 주세요." : "저장하지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.", true);
+    }
+  }
+});
+
+window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+
+/* ---------- 데이터 불러오기 ---------- */
+async function loadFallback() {
+  try { const r = await fetch("data.json", { cache: "no-store" }); if (r.ok) return normalize(await r.json()); } catch (e) {}
+  return normalize({});
+}
+
+(async () => {
+  const fallback = await loadFallback();
+  if (!data) { data = fallback; render(); }
+  renderAdmin();
+  if (!ready) return;
+
+  const fb = initializeApp(FIREBASE_CONFIG);
+  db = getFirestore(fb);
+  auth = getAuth(fb);
+  siteDoc = doc(db, "site", "portfolio");
+
+  // 저장된 내용이 바뀌면 사이트를 보고 있는 모두에게 즉시 반영
+  onSnapshot(siteDoc, snap => {
+    data = snap.exists() ? normalize(snap.data()) : fallback;
+    render();
+  }, () => {});
+
+  onAuthStateChanged(auth, u => {
+    isAdmin = !!(u && u.email && u.email.toLowerCase() === String(ADMIN_EMAIL).toLowerCase());
+    if (!isAdmin && panelOpen) { panelOpen = false; draft = null; render(); }
+    renderAdmin();
+  });
+})();
+</script>
+</body>
+</html>
